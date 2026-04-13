@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIPVAL — Valuation Engine</title>
+<title>RIPVAL — Breaks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -266,8 +266,8 @@ body {
 .announce-dismiss:hover { color: rgba(255,255,255,0.70); }
 
 /* Push nav down when bar is visible */
-body.bar-visible .nav { top: 36px; }
-body.bar-visible .hero { padding-top: calc(64px + 36px); }
+
+
 
 /* ── Semicircle Gauge ── */
 .gauge-wrap {
@@ -1506,23 +1506,24 @@ footer {
 }
 
 .social-btn {
-  width: 36px; height: 36px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  width: 46px; height: 46px;
+  background: rgba(212,160,23,0.10);
+  border: 1px solid rgba(212,160,23,0.35);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.25rem;
   text-decoration: none;
   transition: all 0.2s;
-  color: var(--text-muted);
+  color: var(--gold);
 }
 
 .social-btn:hover {
-  background: rgba(212,160,23,0.1);
-  border-color: var(--gold);
-  color: var(--gold);
+  background: rgba(212,160,23,0.22);
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  transform: translateY(-2px);
 }
 
 .footer-col-title {
@@ -1687,261 +1688,77 @@ footer {
 }
 
 
-/* No announcement bar on interior pages */
-body.page-shell { /* base styles only */ }
 
-/* Engine hero — slim, functional */
-.engine-hero {
+.inner-hero {
   background: linear-gradient(to bottom,
     #B8BCC4 0%, #8A9DB8 18%, #5878A8 35%,
     #304888 52%, #1A2E68 66%, #101E48 80%, #0A0E1A 100%
   );
-  padding: calc(64px + 0.5rem) 0 0.75rem;
+  padding: calc(64px + 1.5rem) 0 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
 }
-.engine-hero::before {
+.inner-hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(212,160,23,0.07) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(212,160,23,0.07) 0%, transparent 65%);
   pointer-events: none;
 }
-.engine-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+.inner-hero-eyebrow {
+  font-family: var(--font-cond);
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--gold-light);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
-  position: relative;
-}
-.engine-hero-sub {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.80);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.5;
-  position: relative;
-}
-
-/* Layout */
-.engine-layout {
-  display: grid;
-  grid-template-columns: 310px 1fr;
-  gap: 2rem;
-  align-items: start;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-.engine-left {
-  position: sticky;
-  top: calc(64px + 0.75rem);
-}
-.engine-panel {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-}
-.engine-panel-header {
-  background: linear-gradient(135deg, rgba(212,160,23,0.12), rgba(212,160,23,0.04));
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.engine-panel-icon {
-  width: 34px; height: 34px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  border-radius: var(--radius-md);
+  color: var(--gold);
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
-  flex-shrink: 0;
+  gap: 0.75rem;
+  position: relative;
 }
-.engine-panel-title {
+.inner-hero-eyebrow::before,
+.inner-hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.inner-hero-title {
   font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--white);
-  letter-spacing: 0.03em;
-}
-.engine-panel-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.1rem; }
-.engine-panel-body { padding: 1.25rem; }
-
-/* Board panel */
-.board-panel {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-}
-.board-header {
-  border-bottom: 1px solid var(--border);
-  padding: 0.85rem 1rem;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.board-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); letter-spacing: 0.03em; margin-bottom: 0.1rem; }
-.board-subtitle { font-size: 0.75rem; color: var(--text-muted); }
-.board-controls { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-
-/* Hockey toggle */
-.hockey-toggle {
-  display: flex; align-items: center; gap: 0.65rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.55rem 1rem;
-  cursor: pointer; transition: all 0.2s; user-select: none;
-}
-.hockey-toggle:hover { border-color: var(--gold); background: rgba(212,160,23,0.08); }
-.hockey-toggle-label {
-  font-family: var(--font-cond); font-size: 0.85rem; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
-}
-.toggle-sw {
-  width: 40px; height: 22px; background: var(--border);
-  border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0;
-}
-.toggle-sw.on { background: var(--gold); }
-.toggle-knob {
-  position: absolute; top: 3px; left: 3px;
-  width: 16px; height: 16px; background: white;
-  border-radius: 50%; transition: left 0.2s;
-}
-.toggle-sw.on .toggle-knob { left: 21px; }
-.btn-reset-board {
-  font-family: var(--font-cond); font-size: 0.85rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
-  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-  border-radius: var(--radius-md); padding: 0.55rem 1.1rem;
-  cursor: pointer; transition: all 0.2s;
-}
-.btn-reset-board:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
-
-/* Stats bar */
-.board-stats {
-  display: flex; gap: 1.5rem; padding: 0.65rem 1.25rem;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid var(--border); flex-wrap: wrap;
-}
-.bstat { display: flex; flex-direction: column; gap: 0.1rem; }
-.bstat-value {
-  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
-  color: var(--gold-light); line-height: 1; transition: color 0.3s;
-}
-.bstat-value.up { color: #34D399; }
-.bstat-value.down { color: #FCA5A5; }
-.bstat-label {
-  font-family: var(--font-cond); font-size: 0.65rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
-}
-
-/* Reprice alert */
-.reprice-alert {
-  display: none; margin: 0.75rem 1.25rem 0;
-  padding: 0.6rem 0.9rem; border-radius: var(--radius-md);
-  font-family: var(--font-cond); font-size: 0.82rem; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  align-items: center; gap: 0.5rem;
-}
-.reprice-alert.visible { display: flex; }
-.reprice-alert.down { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #FCA5A5; }
-.reprice-alert.up   { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); color: #34D399; }
-
-/* Board */
-.board-placeholder { text-align: center; padding: 3rem 2rem; color: var(--text-muted); }
-.board-placeholder-icon { font-size: 2rem; opacity: 0.35; margin-bottom: 0.75rem; }
-.board-placeholder-title {
-  font-family: var(--font-cond); font-size: 0.95rem; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--off-white); margin-bottom: 0.4rem;
-}
-.board-placeholder-sub { font-size: 0.82rem; line-height: 1.6; max-width: 320px; margin: 0 auto; }
-.board-body { padding: 0.65rem; }
-.division-label {
-  grid-column: 1 / -1;
-  font-family: var(--font-cond);
-  font-size: 0.68rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding: 0.3rem 0 0.2rem;
-  border-bottom: 1px solid rgba(212,160,23,0.20);
-  margin-bottom: 0.1rem;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+  position: relative;
 }
-.division-label:first-child { padding-top: 0; }
-.board-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
+.inner-hero-title span {
+  background: linear-gradient(90deg, var(--gold-pale), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.team-tile {
-  border-radius: var(--radius-md); padding: 14px 14px 12px;
-  text-align: center; cursor: pointer; transition: all 0.18s;
-  border: 1.5px solid transparent; user-select: none;
+.inner-hero-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.70);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+  position: relative;
 }
-.team-tile:hover:not(.claimed) {
-  transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.35); filter: brightness(1.15);
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
 }
-.team-tile.claimed { opacity: 0.45; cursor: pointer; }
-.team-city { display: none; }
-.team-nickname {
-  font-family: var(--font-display); font-size: 28px; font-weight: 700;
-  letter-spacing: 0.03em; line-height: 1.0; margin-bottom: 5px;
-}
-.team-tile.claimed .team-nickname { text-decoration: line-through; }
-.team-cohort { font-size: 18px; font-weight: 600; opacity: 0.92; line-height: 1.25; font-family: var(--font-cond); letter-spacing: 0.04em; }
-.team-weight-dots { display: none; }
-.wd { display: none; }
-.misc-tile { background: rgba(255,255,255,0.04) !important; border: 1.5px dashed rgba(255,255,255,0.15) !important; }
-.misc-tile .team-nickname { color: var(--text-muted) !important; }
-
-/* Footer social icons gold */
-.social-btn {
-  width: 36px; height: 36px;
-  background: rgba(212,160,23,0.08);
-  border: 1px solid rgba(212,160,23,0.30);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; text-decoration: none; transition: all 0.2s;
-  color: var(--gold);
-}
-.social-btn:hover {
-  background: rgba(212,160,23,0.18);
-  border-color: var(--gold-light);
-  color: var(--gold-light);
-}
-
-@media (max-width: 900px) {
-  .engine-layout { grid-template-columns: 1fr; }
-  .engine-left { position: static; }
-  .board-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 640px) {
-  .board-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
-  .team-cohort { display: none; }
-}
-
 img { border: none; outline: none; }
-.hero-logo-placeholder, .hero-logo-placeholder img {
-  background: transparent !important; box-shadow: none !important; border: none !important;
-}
-
-
 
 </style>
 </head>
@@ -1953,8 +1770,8 @@ img { border: none; outline: none; }
   </a>
 
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="engine.html" class="active">Engine</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="engine.html">Engine</a></li>
     <li><a href="resources.html">Resources</a></li>
       <li><a href="supplies.html">Supplies</a></li>
     <li><a href="blog.html">Blog</a></li>
@@ -1968,229 +1785,124 @@ img { border: none; outline: none; }
       </svg>
       <input type="text" placeholder="Search breaks...">
     </div>
+    <!-- No CTA button on homepage — calculator is right on the page -->
     <div class="nav-hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
   </div>
 </nav>
 
-<!-- ENGINE HERO — slim, functional -->
-<section class="engine-hero">
+<section class="inner-hero">
   <div class="container" style="position:relative;z-index:2;">
-    <h1 class="engine-hero-title">Valuation Engine</h1>
-    <p class="engine-hero-sub">
-      Enter your repack details for instant Fair Value pricing.<br>
-      Then use the live team board to reprice as spots are claimed.
-    </p>
-    <div style="margin-top:0.75rem;">
-      <a href="#demo" class="btn-secondary" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-cond);font-size:0.9rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:var(--radius-md);border:1.5px solid rgba(255,255,255,0.35);color:#FFFFFF;text-decoration:none;transition:all 0.2s;background:rgba(255,255,255,0.06);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
-        </svg>
-        Watch Demo
-      </a>
-    </div>
+    <div class="inner-hero-eyebrow">Recent Breaks</div>
+    <h1 class="inner-hero-title">Community Break <span>Analysis</span></h1>
+    <p class="inner-hero-sub">Real breaks valued by the RIPVAL engine. Updated regularly.</p>
   </div>
 </section>
 
-<!-- ENGINE LAYOUT -->
-<div class="engine-layout">
+<div class="page-content">
 
-  <!-- LEFT: Calculator -->
-  <div class="engine-left">
-    <div class="engine-panel" id="calculator">
-      <div class="engine-panel-header">
-        <div class="engine-panel-icon">⚡</div>
-        <div>
-          <div class="engine-panel-title">Repack Calculator</div>
-          <div class="engine-panel-sub">Enter break details for Fair Value per spot</div>
-        </div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+    <button style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:var(--radius-md);border:1px solid var(--gold);background:rgba(212,160,23,0.12);color:var(--gold);cursor:pointer;">All</button>
+    <button style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:var(--radius-md);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;">Multisport</button>
+    <button style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:var(--radius-md);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;">Basketball</button>
+    <button style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:var(--radius-md);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;">Football</button>
+    <button style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:var(--radius-md);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;">Baseball</button>
+  </div>
+  <a href="engine.html" style="font-family:var(--font-cond);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:0.4rem;">
+    + Submit a Break
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;">
+
+  <a href="engine.html" class="break-card">
+    <div class="break-card-tag multisport">🏆 Multisport</div>
+    <div class="break-card-name">10-Box Repack — Multisport Premium</div>
+    <div class="break-card-meta">
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spots</span>
+        <span class="break-card-meta-value">33</span>
       </div>
-      <div class="engine-panel-body">
-
-        <div class="form-group">
-          <label class="form-label">Sport</label>
-          <select class="form-input" id="sportType" onchange="onSportChange()">
-            <option value="">Select sport...</option>
-            <option value="Multisport">Multisport</option>
-            <option value="Basketball">Basketball</option>
-            <option value="Football">Football</option>
-            <option value="Baseball">Baseball</option>
-            <option value="Hockey">Hockey</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Total Boxes</label>
-            <input type="number" class="form-input" id="totalBoxes" placeholder="e.g. 10" min="1">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Total Spots</label>
-            <input type="number" class="form-input" id="totalSpots" placeholder="e.g. 33" min="1" value="33">
-          </div>
-        </div>
-
-        <div class="tier-builder">
-          <div class="tier-builder-header">
-            <span class="tier-builder-label">Prize Tiers</span>
-            <button class="btn-add-tier" onclick="addTier()">+ Add Tier</button>
-          </div>
-          <div class="tier-col-labels">
-            <span>Qty</span><span>Min Value ($)</span><span>Max Value ($)</span><span></span>
-          </div>
-          <div id="tierRows"></div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">
-            Max Bid I'm Considering ($)
-            <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted);font-family:var(--font-body);font-size:0.75rem;margin-left:0.35rem;">— optional</span>
-          </label>
-          <input type="number" class="form-input" id="spotPrice" placeholder="Leave blank for ranges only" min="0" step="0.01">
-        </div>
-
-        <button class="btn-calculate" onclick="calculate()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-          </svg>
-          Value This Break
-        </button>
-
-        <!-- Results -->
-        <div class="results-panel" id="resultsPanel">
-          <div class="results-fair-value">
-            <div class="results-fv-label">Fair Value Per Spot</div>
-            <div class="results-fv-value" id="fairValueDisplay">$0.00</div>
-            <div class="results-fv-range" id="fairValueRange">Range: $0.00 – $0.00</div>
-          </div>
-          <div class="verdict-badge" id="verdictBadge" style="display:none;">
-            <span class="verdict-icon" id="verdictIcon">—</span>
-            <span id="verdictText">—</span>
-          </div>
-          <div id="gaugeContainer" style="display:none;margin:0.75rem 0;">
-            <svg viewBox="0 0 400 135" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;display:block;">
-              <defs>
-                <linearGradient id="arcGrad" x1="80" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%"   stop-color="#34D399"/>
-                  <stop offset="25%"  stop-color="#60A5FA"/>
-                  <stop offset="50%"  stop-color="#FCD34D"/>
-                  <stop offset="75%"  stop-color="#FCA5A5"/>
-                  <stop offset="100%" stop-color="#FF6B6B"/>
-                </linearGradient>
-                <filter id="nGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <filter id="tGlow" x="-200%" y="-200%" width="500%" height="500%">
-                  <feGaussianBlur stdDeviation="5"/>
-                </filter>
-                <filter id="aGlow" x="-2%" y="-50%" width="104%" height="200%">
-                  <feGaussianBlur stdDeviation="2.5" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <radialGradient id="fGrad" cx="50%" cy="100%" r="80%">
-                  <stop offset="0%"   stop-color="#1e3070"/>
-                  <stop offset="100%" stop-color="#06091a"/>
-                </radialGradient>
-              </defs>
-              <path d="M 80 130 A 120 120 0 0 1 320 130 Z" fill="url(#fGrad)" opacity="0.85"/>
-              <path d="M 80 130 A 120 120 0 0 1 320 130" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="22" stroke-linecap="round"/>
-              <path d="M 80 130 A 120 120 0 0 1 320 130" fill="none" stroke="url(#arcGrad)" stroke-width="16" stroke-linecap="round" filter="url(#aGlow)"/>
-              <path d="M 80 130 A 120 120 0 0 1 320 130" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-linecap="round"/>
-              <g id="gaugeNeedle" transform="rotate(0, 200, 130)" style="transition:none;">
-                <line x1="200" y1="125" x2="200" y2="14" stroke="#F0C040" stroke-width="5" stroke-linecap="round" filter="url(#nGlow)"/>
-                <line x1="200" y1="125" x2="200" y2="14" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round"/>
-                <line x1="200" y1="130" x2="200" y2="144" stroke="#F0C040" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>
-                <circle cx="200" cy="14" r="10" fill="rgba(255,80,80,0.50)" filter="url(#tGlow)"/>
-                <circle cx="200" cy="14" r="5" fill="white" stroke="#F0C040" stroke-width="2"/>
-              </g>
-              <circle cx="200" cy="130" r="12" fill="#0a0e1a" stroke="rgba(200,220,255,0.40)" stroke-width="2"/>
-              <circle cx="200" cy="130" r="5" fill="white" opacity="0.9"/>
-            </svg>
-          </div>
-          <div id="thresholdTable">
-            <div class="band-reference-title" style="margin-top:1rem;">Bid Price Ranges</div>
-            <table class="band-threshold-table" id="thresholdTableBody"><tbody></tbody></table>
-          </div>
-          <div class="results-breakdown" style="margin-top:1rem;">
-            <div class="breakdown-item">
-              <div class="breakdown-label">Low Total Value</div>
-              <div class="breakdown-value" id="lowTotal">—</div>
-            </div>
-            <div class="breakdown-item">
-              <div class="breakdown-label">High Total Value</div>
-              <div class="breakdown-value" id="highTotal">—</div>
-            </div>
-            <div class="breakdown-item">
-              <div class="breakdown-label">EV Low / Spot</div>
-              <div class="breakdown-value" id="evLow">—</div>
-            </div>
-            <div class="breakdown-item">
-              <div class="breakdown-label">EV High / Spot</div>
-              <div class="breakdown-value" id="evHigh">—</div>
-            </div>
-          </div>
-          <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted);line-height:1.6;">
-            <span style="margin-right:0.35rem;">⚠</span>
-            Fair Value is calculated using seller-provided box values. RIPVAL does not independently verify claimed card values — always cross-reference with recent sales data before bidding. Calculations are anonymously logged to power our community break database.
-          </div>
-        </div>
-
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spot Price</span>
+        <span class="break-card-meta-value">$145</span>
+      </div>
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Tiers</span>
+        <span class="break-card-meta-value">4</span>
       </div>
     </div>
-  </div>
+    <div class="break-card-footer">
+      <div>
+        <div class="break-card-ev-label">Fair Value / Spot</div>
+        <div class="break-card-ev">$138.64</div>
+      </div>
+      <div class="break-card-verdict fair">Fair</div>
+    </div>
+  </a>
 
-  <!-- RIGHT: Team Board -->
-  <div>
-    <div class="board-panel">
-      <div class="board-header">
-        <div>
-          <div class="board-title">Live Team Board</div>
-          <div class="board-subtitle">Click a team as it's claimed — Fair Value reprices in real time</div>
-        </div>
-        <div class="board-controls">
-          <div class="hockey-toggle" id="hockeyToggle" style="display:none;" onclick="toggleHockey()">
-            <span class="hockey-toggle-label">Hockey in Misc</span>
-            <div class="toggle-sw" id="toggleSw"><div class="toggle-knob"></div></div>
-          </div>
-          <button class="btn-reset-board" onclick="resetBoard()">↺ Reset</button>
-        </div>
+  <a href="engine.html" class="break-card">
+    <div class="break-card-tag basketball">🏀 Basketball</div>
+    <div class="break-card-name">8-Box NBA Repack — Mid-Tier</div>
+    <div class="break-card-meta">
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spots</span>
+        <span class="break-card-meta-value">30</span>
       </div>
-      <div class="reprice-alert" id="repriceAlert"></div>
-      <div class="board-stats" id="boardStats" style="display:none;">
-        <div class="bstat">
-          <div class="bstat-value" id="bsOrigFV">—</div>
-          <div class="bstat-label">Original Fair Value</div>
-        </div>
-        <div class="bstat">
-          <div class="bstat-value" id="bsAdjFV">—</div>
-          <div class="bstat-label">Adjusted Fair Value</div>
-        </div>
-        <div class="bstat">
-          <div class="bstat-value" id="bsRemaining">—</div>
-          <div class="bstat-label">Spots Remaining</div>
-        </div>
-        <div class="bstat">
-          <div class="bstat-value" id="bsDelta">—</div>
-          <div class="bstat-label">Value Change</div>
-        </div>
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spot Price</span>
+        <span class="break-card-meta-value">$95</span>
       </div>
-      <div class="board-body">
-        <div id="boardContent">
-          <div class="board-placeholder">
-            <div class="board-placeholder-icon">🏈</div>
-            <div class="board-placeholder-title">Board Not Active</div>
-            <div class="board-placeholder-sub">
-              Select Multisport and run the calculator first.
-              The team board activates automatically after you value a break.
-            </div>
-          </div>
-        </div>
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Tiers</span>
+        <span class="break-card-meta-value">3</span>
       </div>
     </div>
-  </div>
+    <div class="break-card-footer">
+      <div>
+        <div class="break-card-ev-label">Fair Value / Spot</div>
+        <div class="break-card-ev">$116.67</div>
+      </div>
+      <div class="break-card-verdict bargain">Bargain</div>
+    </div>
+  </a>
+
+  <a href="engine.html" class="break-card">
+    <div class="break-card-tag football">🏈 Football</div>
+    <div class="break-card-name">12-Box NFL Repack — High Roller</div>
+    <div class="break-card-meta">
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spots</span>
+        <span class="break-card-meta-value">32</span>
+      </div>
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Spot Price</span>
+        <span class="break-card-meta-value">$220</span>
+      </div>
+      <div class="break-card-meta-item">
+        <span class="break-card-meta-label">Tiers</span>
+        <span class="break-card-meta-value">5</span>
+      </div>
+    </div>
+    <div class="break-card-footer">
+      <div>
+        <div class="break-card-ev-label">Fair Value / Spot</div>
+        <div class="break-card-ev">$193.75</div>
+      </div>
+      <div class="break-card-verdict expensive">Expensive</div>
+    </div>
+  </a>
+
+</div>
+
+<div style="text-align:center;margin-top:2.5rem;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-lg);">
+  <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.5rem;">Want your break listed here?</p>
+  <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:0.75rem;">Value it in the engine first, then share the results with us.</p>
+  <a href="/cdn-cgi/l/email-protection#bbd3ded7d7d4fbc9d2cbcddad795d8d4d6" style="font-family:var(--font-cond);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Submit a Break →</a>
+</div>
 
 </div>
 
@@ -2199,7 +1911,7 @@ img { border: none; outline: none; }
     <div class="footer-grid">
       <div>
         <div class="footer-brand-name"><span class="rip">RIP</span><span class="val">VAL</span></div>
-        <div class="footer-tagline"><span style="color:var(--white);">Know the Rip</span> <span style="color:var(--gold-light);">Before You Bid</span></div>
+        <div class="footer-tagline"><span style="color:#FFFFFF;">Know the Rip</span> <span style="color:#F0C040;">Before You Bid</span></div>
         <p class="footer-desc">The sports card hobby's premier break and repack valuation engine. Free, fast, and built for serious collectors.</p>
         <div class="footer-socials">
           <a href="#" class="social-btn" title="TikTok">
@@ -2222,8 +1934,7 @@ img { border: none; outline: none; }
         <ul class="footer-links">
           <li><a href="engine.html">Valuation Engine</a></li>
           <li><a href="breaks.html">Browse Breaks</a></li>
-          <li><a href="resources.html">Resources</a></li>
-      <li><a href="supplies.html">Supplies</a></li>
+          <li><a href="supplies.html">Supplies</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
@@ -2259,571 +1970,10 @@ img { border: none; outline: none; }
   </div>
 </footer>
 
-<script>
-// ============================================================
-// ANNOUNCEMENT BAR - removed on engine page
-// ============================================================
-// No announcement bar on interior pages
-
-// ============================================================
-// NAV SCROLL
-// ============================================================
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
   if (window.scrollY > 40) {
     nav.style.background = 'rgba(10,14,26,0.98)';
     nav.style.boxShadow = '0 2px 24px rgba(0,0,0,0.5)';
-  } else {
-    nav.style.background = 'rgba(10,14,26,0.96)';
-    nav.style.boxShadow = 'none';
-  }
-});
-
-function toggleMenu() {}
-
-// ============================================================
-// TIER BUILDER
-// ============================================================
-const defaultTiers = [
-  { qty: '', min: '', max: '' },
-  { qty: '', min: '', max: '' },
-  { qty: '', min: '', max: '' },
-  { qty: '', min: '', max: '' },
-];
-let tierCount = 0;
-
-function addTier(tier) {
-  if (!tier) tier = { qty: '', min: '', max: '' };
-  tierCount++;
-  var id = tierCount;
-  var row = document.createElement('div');
-  row.className = 'tier-row';
-  row.id = 'tier-' + id;
-  var html = '';
-  html += '<input type="number" class="form-input tier-qty" placeholder="e.g. 5" min="1" value="' + tier.qty + '">';
-  html += '<input type="number" class="form-input tier-min" placeholder="e.g. 100" min="0" step="0.01" value="' + tier.min + '">';
-  html += '<input type="number" class="form-input tier-max" placeholder="e.g. 500" min="0" step="0.01" value="' + tier.max + '">';
-  html += '<button class="btn-remove-tier" onclick="removeTier(\'tier-' + id + '\')">✕</button>';
-  row.innerHTML = html;
-  document.getElementById('tierRows').appendChild(row);
-}
-
-function removeTier(id) {
-  var el = document.getElementById(id);
-  if (el) el.remove();
-}
-
-function getTiers() {
-  return Array.from(document.querySelectorAll('#tierRows .tier-row')).map(function(row) {
-    return {
-      qty: parseFloat(row.querySelector('.tier-qty').value) || 0,
-      min: parseFloat(row.querySelector('.tier-min').value) || 0,
-      max: parseFloat(row.querySelector('.tier-max').value) || 0,
-    };
-  });
-}
-
-// ============================================================
-// FORMATTING
-// ============================================================
-function fmt(n) {
-  return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-// ============================================================
-// GAUGE
-// ============================================================
-function ratioToDeg(ratio) {
-  var minRatio = 0.60, maxRatio = 1.40;
-  var clamped = Math.min(Math.max(ratio, minRatio), maxRatio);
-  return ((clamped - minRatio) / (maxRatio - minRatio)) * 180 - 90;
-}
-
-function animateNeedle(ratio) {
-  var deg = ratioToDeg(ratio);
-  requestAnimationFrame(function() {
-    var needle = document.getElementById('gaugeNeedle');
-    if (!needle) return;
-    needle.setAttribute('transform', 'rotate(-90, 200, 130)');
-    requestAnimationFrame(function() {
-      var start = -90, end = deg, duration = 1200;
-      var startTime = performance.now();
-      function step(now) {
-        var elapsed = now - startTime;
-        var progress = Math.min(elapsed / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var current = start + (end - start) * eased;
-        needle.setAttribute('transform', 'rotate(' + current + ', 200, 130)');
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  });
-}
-
-// ============================================================
-// BAND DEFINITIONS
-// ============================================================
-var BANDS = [
-  { key: 'bargain',    label: 'Bargain',    icon: '🟢', cls: 'bargain',    lo: 0,    hi: 0.80 },
-  { key: 'good-deal',  label: 'Good Deal',  icon: '🔵', cls: 'good-deal',  lo: 0.80, hi: 0.90 },
-  { key: 'fair',       label: 'Fair Value', icon: '🟡', cls: 'fair',       lo: 0.90, hi: 1.10 },
-  { key: 'expensive',  label: 'Expensive',  icon: '🔴', cls: 'expensive',  lo: 1.10, hi: 1.20 },
-  { key: 'overpriced', label: 'Overpriced', icon: '⛔', cls: 'overpriced', lo: 1.20, hi: 999  },
-];
-var BAND_COLORS = {
-  'bargain': '#34D399', 'good-deal': '#60A5FA',
-  'fair': '#FCD34D', 'expensive': '#FCA5A5', 'overpriced': '#FF6B6B'
-};
-function getBand(ratio) {
-  return BANDS.find(function(b) { return ratio >= b.lo && ratio < b.hi; }) || BANDS[4];
-}
-
-// ============================================================
-// SPORT CHANGE
-// ============================================================
-function onSportChange() {
-  var sport = document.getElementById('sportType').value;
-  var toggle = document.getElementById('hockeyToggle');
-  if (toggle) toggle.style.display = sport === 'Multisport' ? 'flex' : 'none';
-}
-
-// ============================================================
-// MAIN CALCULATOR
-// ============================================================
-var lastFairValue = 0;
-var lastSpots = 33;
-
-function calculate() {
-  var spots    = parseFloat(document.getElementById('totalSpots').value) || 0;
-  var askPrice = parseFloat(document.getElementById('spotPrice').value);
-  var tiers    = getTiers();
-  var sport    = document.getElementById('sportType').value;
-  var hasBid   = !isNaN(askPrice) && askPrice > 0;
-
-  if (spots <= 0)         { alert('Please enter the number of spots.'); return; }
-  if (tiers.length === 0) { alert('Please add at least one prize tier.'); return; }
-
-  var lowTotal = 0, highTotal = 0;
-  tiers.forEach(function(t) { lowTotal += t.qty * t.min; highTotal += t.qty * t.max; });
-
-  var midTotal  = (lowTotal + highTotal) / 2;
-  var fairValue = midTotal / spots;
-  var evLow     = lowTotal  / spots;
-  var evHigh    = highTotal / spots;
-
-  lastFairValue = fairValue;
-  lastSpots     = spots;
-
-  document.getElementById('fairValueDisplay').textContent = fmt(fairValue);
-  document.getElementById('fairValueRange').textContent = 'EV Range: ' + fmt(evLow) + ' – ' + fmt(evHigh) + ' per spot';
-  document.getElementById('lowTotal').textContent  = fmt(lowTotal);
-  document.getElementById('highTotal').textContent = fmt(highTotal);
-  document.getElementById('evLow').textContent     = fmt(evLow);
-  document.getElementById('evHigh').textContent    = fmt(evHigh);
-
-  // Threshold table
-  var tbody = document.querySelector('#thresholdTableBody tbody');
-  tbody.innerHTML = '';
-  BANDS.forEach(function(b, i) {
-    var lo = b.lo * fairValue, hi = b.hi * fairValue;
-    var rangeText;
-    if (i === 0)               rangeText = 'Below ' + fmt(fairValue * 0.80);
-    else if (i === BANDS.length - 1) rangeText = 'Above ' + fmt(fairValue * 1.20);
-    else                       rangeText = fmt(lo) + ' – ' + fmt(hi);
-    var tr = document.createElement('tr');
-    tr.innerHTML =
-      '<td class="band-dot-cell"><div style="width:9px;height:9px;border-radius:50%;background:' + BAND_COLORS[b.cls] + ';box-shadow:0 0 5px ' + BAND_COLORS[b.cls] + ';"></div></td>' +
-      '<td class="band-name-cell" style="color:' + BAND_COLORS[b.cls] + '">' + b.label + '</td>' +
-      '<td class="band-range-cell">' + rangeText + '</td>';
-    tbody.appendChild(tr);
-  });
-
-  // Bid verdict
-  if (hasBid) {
-    var ratio   = askPrice / fairValue;
-    var pctDiff = (ratio - 1) * 100;
-    var band    = getBand(ratio);
-    var verdictDetail = Math.abs(pctDiff) < 0.5 ? 'Right at Fair Value'
-      : pctDiff < 0 ? 'Your bid is ' + Math.abs(pctDiff).toFixed(1) + '% below Fair Value'
-      : 'Your bid is ' + pctDiff.toFixed(1) + '% above Fair Value';
-    var badge = document.getElementById('verdictBadge');
-    badge.className = 'verdict-badge ' + band.cls;
-    badge.style.display = 'flex';
-    document.getElementById('verdictIcon').textContent = band.icon;
-    document.getElementById('verdictText').innerHTML = '<strong>' + band.label + '</strong> — ' + verdictDetail;
-    var gc = document.getElementById('gaugeContainer');
-    gc.style.display = 'block';
-    var needle = document.getElementById('gaugeNeedle');
-    if (needle) needle.setAttribute('transform', 'rotate(-90, 200, 130)');
-    setTimeout(function() { animateNeedle(ratio); }, 150);
-  } else {
-    document.getElementById('verdictBadge').style.display = 'none';
-    document.getElementById('gaugeContainer').style.display = 'none';
-  }
-
-  document.getElementById('resultsPanel').classList.add('visible');
-
-  // Activate team board if Multisport
-  if (sport === 'Multisport') {
-    activateBoard(fairValue, spots);
-  }
-
-  // Save to break history for homepage recent breaks
-  var tierRows = document.querySelectorAll('#tierRows .tier-row').length;
-  var bidVal = hasBid ? askPrice : null;
-  var bCls = hasBid ? getBand(askPrice/fairValue).cls : null;
-  var bLabel = hasBid ? getBand(askPrice/fairValue).label : null;
-  saveBreakToHistory(fairValue, spots, 
-    parseFloat(document.getElementById('totalBoxes').value)||0,
-    sport, bidVal, bCls, bLabel, tierRows);
-
-  setTimeout(function() {
-    document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 100);
-}
-
-// ============================================================
-// TEAM BOARD
-// ============================================================
-var hockeyInMisc = false;
-var claimedTeams = new Set();
-var boardOriginalFV = 0;
-var boardTotalSpots = 33;
-
-function toggleHockey() {
-  hockeyInMisc = !hockeyInMisc;
-  var sw = document.getElementById('toggleSw');
-  sw.className = 'toggle-sw' + (hockeyInMisc ? ' on' : '');
-  if (boardOriginalFV > 0) renderBoard();
-}
-
-function resetBoard() {
-  claimedTeams.clear();
-  document.getElementById('repriceAlert').className = 'reprice-alert';
-  if (boardOriginalFV > 0) {
-    renderBoard();
-    updateBoardStats(boardOriginalFV, boardOriginalFV, boardTotalSpots, boardTotalSpots);
-  }
-}
-
-function activateBoard(fairValue, spots) {
-  boardOriginalFV  = fairValue;
-  boardTotalSpots  = spots;
-  claimedTeams.clear();
-  document.getElementById('repriceAlert').className = 'reprice-alert';
-  document.getElementById('boardStats').style.display = 'flex';
-  var ht = document.getElementById('hockeyToggle');
-  if (ht) ht.style.display = 'flex';
-  updateBoardStats(fairValue, fairValue, spots, spots);
-  renderBoard();
-  setTimeout(function() {
-    document.querySelector('.board-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 300);
-}
-
-function updateBoardStats(origFV, adjFV, totalSpots, remainingSpots) {
-  document.getElementById('bsOrigFV').textContent = fmt(origFV);
-  var adjEl   = document.getElementById('bsAdjFV');
-  var deltaEl = document.getElementById('bsDelta');
-  adjEl.textContent = fmt(adjFV);
-  var delta    = adjFV - origFV;
-  var deltaPct = origFV > 0 ? ((delta / origFV) * 100).toFixed(1) : '0.0';
-  adjEl.className   = 'bstat-value' + (delta > 0.01 ? ' up' : delta < -0.01 ? ' down' : '');
-  deltaEl.textContent = (delta >= 0 ? '+' : '') + fmt(delta) + ' (' + (delta >= 0 ? '+' : '') + deltaPct + '%)';
-  deltaEl.className   = 'bstat-value' + (delta > 0.01 ? ' up' : delta < -0.01 ? ' down' : '');
-  document.getElementById('bsRemaining').textContent = (totalSpots - claimedTeams.size) + ' / ' + totalSpots;
-}
-
-function claimTeam(slotKey) {
-  if (claimedTeams.has(slotKey)) {
-    claimedTeams.delete(slotKey);
-  } else {
-    claimedTeams.add(slotKey);
-  }
-  var adjFV = recalculateFV();
-  renderBoard();
-  updateBoardStats(boardOriginalFV, adjFV, boardTotalSpots, boardTotalSpots - claimedTeams.size);
-  showRepriceAlert(adjFV, boardOriginalFV);
-}
-
-function recalculateFV() {
-  var allSlots    = getTeamSlots();
-  var remaining   = allSlots.filter(function(s) { return !claimedTeams.has(s.key); });
-  if (remaining.length === 0) return boardOriginalFV;
-  var totalWeight    = allSlots.reduce(function(sum, s) { return sum + s.weight; }, 0);
-  var remainingWeight = remaining.reduce(function(sum, s) { return sum + s.weight; }, 0);
-  var weightRatio    = remainingWeight / totalWeight;
-  var origTotal      = boardOriginalFV * boardTotalSpots;
-  var adjTotal       = origTotal * weightRatio;
-  return adjTotal / remaining.length;
-}
-
-function showRepriceAlert(adjFV, origFV) {
-  var alertEl  = document.getElementById('repriceAlert');
-  var delta    = adjFV - origFV;
-  var deltaPct = Math.abs((delta / origFV) * 100).toFixed(1);
-  if (Math.abs(delta) < 0.01) { alertEl.className = 'reprice-alert'; return; }
-  var dir  = delta < 0 ? 'down' : 'up';
-  var icon = delta < 0 ? '↓' : '↑';
-  alertEl.className = 'reprice-alert visible ' + dir;
-  alertEl.innerHTML = icon + ' Fair Value repriced to ' + fmt(adjFV) + ' (' + (delta < 0 ? '' : '+') + deltaPct + '% ' + (delta < 0 ? 'lower' : 'higher') + ')';
-}
-
-
-// ============================================================
-// COMPLETE 33-SPOT TEAM COHORT DATA
-// Source: Standard Multisport Card Break Team Cohorts doc
-// Order: NFL · NBA · MLB · NHL
-// NFL name NOT included in cohort string (shown as nickname separately)
-// "None" entries skipped — no blank spots
-// ============================================================
-// ============================================================
-// TEAM DATA — organized by NFL conference and division
-// Division order: NFC (East, North, South, West) then AFC (East, North, South, West)
-// Alphabetical by nickname within each division
-// Cohort = NBA · MLB · NHL (NHL only shown if !hockeyInMisc)
-// NFL team NOT repeated in cohort string
-// ============================================================
-function getTeamSlots() {
-  function c(nba, mlb, hockey) {
-    var parts = [];
-    if (nba)  parts.push(nba);
-    if (mlb)  parts.push(mlb);
-    if (!hockeyInMisc && hockey) parts.push(hockey);
-    return parts.join(' · ');
-  }
-
-  return [
-    // ── NFC EAST ─────────────────────────────────────────────
-    { key:'dal', nickname:'COWBOYS',    bg:'#003594', textColor:'#A0AAAD',
-      cohort: c('Mavericks','Rangers','Stars'),           weight:9 },
-    { key:'phi', nickname:'EAGLES',     bg:'#004C54', textColor:'#A5ACAF',
-      cohort: c('76ers','Phillies','Flyers'),             weight:7 },
-    { key:'nyg', nickname:'GIANTS',     bg:'#0B2265', textColor:'#A71930',
-      cohort: c('Knicks','Yankees','Rangers'),            weight:8 },
-    { key:'wsh', nickname:'COMMANDERS', bg:'#773141', textColor:'#FFB612',
-      cohort: c('Wizards','Nationals','Capitals'),        weight:5 },
-
-    // ── NFC NORTH ────────────────────────────────────────────
-    { key:'chi', nickname:'BEARS',      bg:'#0B162A', textColor:'#C83803',
-      cohort: c('Bulls','Cubs','Blackhawks'),             weight:7 },
-    { key:'det', nickname:'LIONS',      bg:'#0076B6', textColor:'#B0B7BC',
-      cohort: c('Pistons','Tigers','Red Wings'),          weight:5 },
-    { key:'gb',  nickname:'PACKERS',    bg:'#203731', textColor:'#FFB612',
-      cohort: c('Bucks','Brewers','Canucks'),             weight:6 },
-    { key:'min', nickname:'VIKINGS',    bg:'#4F2683', textColor:'#FFC62F',
-      cohort: c('Timberwolves','Twins','Wild'),           weight:5 },
-
-    // ── NFC SOUTH ────────────────────────────────────────────
-    { key:'tb',  nickname:'BUCCANEERS', bg:'#D50A0A', textColor:'#FF7900',
-      cohort: c('Magic','Rays','Lightning'),             weight:6 },
-    { key:'atl', nickname:'FALCONS',    bg:'#A71930', textColor:'#000000',
-      cohort: c('Hawks','Braves','Flames'),              weight:6 },
-    { key:'car', nickname:'PANTHERS',   bg:'#0085CA', textColor:'#101820',
-      cohort: c('Hornets','Cardinals','Hurricanes'),     weight:3 },
-    { key:'no',  nickname:'SAINTS',     bg:'#D3BC8D', textColor:'#101820',
-      cohort: c('Pelicans',null,'Canadiens'),            weight:4 },
-
-    // ── NFC WEST ─────────────────────────────────────────────
-    { key:'ari', nickname:'CARDINALS',  bg:'#97233F', textColor:'#FFB612',
-      cohort: c('Suns','D-Backs','Coyotes'),             weight:5 },
-    { key:'lar', nickname:'RAMS',       bg:'#003594', textColor:'#FFA300',
-      cohort: c('Lakers','Angels','Ducks'),              weight:9 },
-    { key:'sea', nickname:'SEAHAWKS',   bg:'#002244', textColor:'#69BE28',
-      cohort: c('Trail Blazers','Mariners','Kraken'),    weight:6 },
-    { key:'sf',  nickname:'49ERS',      bg:'#AA0000', textColor:'#B3995D',
-      cohort: c('Warriors','Giants','Sharks'),           weight:8 },
-
-    // ── AFC EAST ─────────────────────────────────────────────
-    { key:'buf', nickname:'BILLS',      bg:'#00338D', textColor:'#C60C30',
-      cohort: c('Raptors','Blue Jays','Sabres'),         weight:5 },
-    { key:'mia', nickname:'DOLPHINS',   bg:'#008E97', textColor:'#FC4C02',
-      cohort: c('Heat','Marlins','Florida Panthers'),    weight:6 },
-    { key:'nyj', nickname:'JETS',       bg:'#125740', textColor:'#ffffff',
-      cohort: c('Nets','Mets','Islanders'),              weight:4 },
-    { key:'ne',  nickname:'PATRIOTS',   bg:'#002244', textColor:'#C60C30',
-      cohort: c('Celtics','Red Sox','Bruins'),           weight:7 },
-
-    // ── AFC NORTH ────────────────────────────────────────────
-    { key:'bal', nickname:'RAVENS',     bg:'#241773', textColor:'#9E7C0C',
-      cohort: c('Kings','Orioles','NJ Devils'),          weight:6 },
-    { key:'cin', nickname:'BENGALS',    bg:'#FB4F14', textColor:'#000000',
-      cohort: c(null,'Reds','Jets'),                     weight:4 },
-    { key:'cle', nickname:'BROWNS',     bg:'#FF3C00', textColor:'#311D00',
-      cohort: c('Cavaliers','Guardians','Blue Jackets'), weight:4 },
-    { key:'pit', nickname:'STEELERS',   bg:'#FFB612', textColor:'#101820',
-      cohort: c('Spurs','Pirates','Penguins'),           weight:6 },
-
-    // ── AFC SOUTH ────────────────────────────────────────────
-    { key:'hou', nickname:'TEXANS',     bg:'#03202F', textColor:'#A71930',
-      cohort: c('Rockets','Astros','Maple Leafs'),       weight:5 },
-    { key:'ind', nickname:'COLTS',      bg:'#002C5F', textColor:'#A2AAAD',
-      cohort: c('Pacers','White Sox','Senators'),        weight:4 },
-    { key:'jax', nickname:'JAGUARS',    bg:'#006778', textColor:'#9F792C',
-      cohort: c(null,'Padres','Oilers'),                 weight:3 },
-    { key:'ten', nickname:'TITANS',     bg:'#0C2340', textColor:'#4B92DB',
-      cohort: c('Grizzlies','Cardinals','Predators'),    weight:4 },
-
-    // ── AFC WEST ─────────────────────────────────────────────
-    { key:'den', nickname:'BRONCOS',    bg:'#FB4F14', textColor:'#002244',
-      cohort: c('Nuggets','Rockies','Avalanche'),        weight:6 },
-    { key:'lac', nickname:'CHARGERS',   bg:'#0080C6', textColor:'#FFC20E',
-      cohort: c('Clippers','Dodgers','Kings'),           weight:6 },
-    { key:'kc',  nickname:'CHIEFS',     bg:'#E31837', textColor:'#FFB81C',
-      cohort: c('Thunder','Royals','Blues'),             weight:9 },
-    { key:'lv',  nickname:'RAIDERS',    bg:'#000000', textColor:'#A5ACAF',
-      cohort: c('Jazz','Athletics','Golden Knights'),    weight:5 },
-
-    // ── MISC ─────────────────────────────────────────────────
-    { key:'misc', nickname:'MISC',      bg:'rgba(255,255,255,0.06)', textColor:'#8899BB',
-      cohort: hockeyInMisc
-        ? 'Soccer · WNBA · Golf · UFC · NASCAR · NIL · Hockey'
-        : 'Soccer · WNBA · Golf · UFC · NASCAR · NIL',
-      weight:2, isMisc:true },
-  ];
-}
-
-
-var DIVISION_LABELS = {
-  'dal': 'NFC East', 'chi': 'NFC North',
-  'tb':  'NFC South', 'ari': 'NFC West',
-  'buf': 'AFC East',  'bal': 'AFC North',
-  'hou': 'AFC South', 'den': 'AFC West',
-  'misc': 'Misc'
-};
-
-function renderBoard() {
-  var slots = getTeamSlots();
-  var grid  = document.createElement('div');
-  grid.className = 'board-grid';
-
-  slots.forEach(function(slot) {
-    if (DIVISION_LABELS[slot.key]) {
-      var label = document.createElement('div');
-      label.className = 'division-label';
-      label.textContent = DIVISION_LABELS[slot.key];
-      grid.appendChild(label);
-    }
-    var tile = document.createElement('div');
-    var cls = 'team-tile';
-    if (slot.isMisc) cls += ' misc-tile';
-    if (claimedTeams.has(slot.key)) cls += ' claimed';
-    tile.className = cls;
-    tile.style.background = slot.bg;
-    tile.onclick = function() { claimTeam(slot.key); };
-
-    var filledDots = Math.round(slot.weight / 2);
-    var dots = '';
-    for (var i = 0; i < 5; i++) {
-      dots += '<div class="wd' + (i < filledDots ? ' on' : '') + '"></div>';
-    }
-
-    var html = '';
-    if (slot.city) {
-      html += '<div class="team-city" style="color:' + slot.textColor + ';opacity:0.6;">' + slot.city + '</div>';
-    }
-    html += '<div class="team-nickname' + (claimedTeams.has(slot.key) ? ' struck' : '') + '" style="color:' + slot.textColor + ';">' + slot.nickname + '</div>';
-    html += '<div class="team-cohort" style="color:' + slot.textColor + ';">' + slot.cohort + '</div>';
-    html += '<div class="team-weight-dots">' + dots + '</div>';
-    tile.innerHTML = html;
-    grid.appendChild(tile);
-  });
-
-  var content = document.getElementById('boardContent');
-  content.innerHTML = '';
-  content.appendChild(grid);
-}
-
-
-
-
-// ============================================================
-// SAVE BREAK TO HISTORY (localStorage → homepage recent breaks)
-// ============================================================
-var RB_KEY = 'ripval_recent_breaks';
-
-function saveBreakToHistory(fairValue, spots, boxes, sport, bid, bandCls, bandLabel, tierCount) {
-  var entry = {
-    date:       new Date().toISOString(),
-    sport:      sport,
-    spots:      spots,
-    boxes:      boxes,
-    tiers:      tierCount,
-    fairValue:  fairValue,
-    bid:        bid || null,
-    bandCls:    bandCls || null,
-    bandLabel:  bandLabel || null
-  };
-  try {
-    var existing = [];
-    var raw = localStorage.getItem(RB_KEY);
-    if (raw) existing = JSON.parse(raw);
-    existing.push(entry);
-    // Keep last 10
-    if (existing.length > 10) existing = existing.slice(-10);
-    localStorage.setItem(RB_KEY, JSON.stringify(existing));
-  } catch(e) {}
-}
-
-// ============================================================
-// LOCAL STORAGE PERSISTENCE
-// ============================================================
-var STORAGE_KEY = 'ripval_engine_state';
-
-function saveState() {
-  var state = {
-    sport: document.getElementById('sportType').value,
-    boxes: document.getElementById('totalBoxes').value,
-    spots: document.getElementById('totalSpots').value,
-    bid:   document.getElementById('spotPrice').value,
-    tiers: getTiers()
-  };
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
-}
-
-function restoreState() {
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return false;
-    var state = JSON.parse(raw);
-    if (state.sport) document.getElementById('sportType').value = state.sport;
-    if (state.boxes) document.getElementById('totalBoxes').value = state.boxes;
-    if (state.spots) document.getElementById('totalSpots').value = state.spots;
-    if (state.bid)   document.getElementById('spotPrice').value  = state.bid;
-    // Tiers intentionally NOT restored — always start with blank rows
-    onSportChange();
-    return true;
-  } catch(e) { return false; }
-}
-
-// Auto-save on any input change
-document.addEventListener('input', function(e) {
-  if (e.target.closest('#calculator')) saveState();
-});
-document.addEventListener('change', function(e) {
-  if (e.target.closest('#calculator')) saveState();
-});
-
-// ============================================================
-// INIT — always start with blank tier rows
-// ============================================================
-// Clear tiers from any saved state — always start fresh
-try {
-  var oldState = localStorage.getItem(STORAGE_KEY);
-  if (oldState) {
-    var parsed = JSON.parse(oldState);
-    parsed.tiers = [];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-  }
-} catch(e) {}
-
-// Restore sport/boxes/spots/bid but NOT tiers
-restoreState();
-
-// Always add 4 blank tier rows
-defaultTiers.forEach(function(t) { addTier(t); });
-
-</script>
-</body>
-</html>
+  } els

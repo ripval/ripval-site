@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIPVAL — About</title>
+<title>RIPVAL — Supplies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1773,9 +1773,9 @@ img { border: none; outline: none; }
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="engine.html">Engine</a></li>
     <li><a href="resources.html">Resources</a></li>
-      <li><a href="supplies.html">Supplies</a></li>
+      <li><a href="supplies.html" class="active">Supplies</a></li>
     <li><a href="blog.html">Blog</a></li>
-    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
 
   <div class="nav-right">
@@ -1794,97 +1794,46 @@ img { border: none; outline: none; }
 
 <section class="inner-hero">
   <div class="container" style="position:relative;z-index:2;">
-    <div class="inner-hero-eyebrow">About RIPVAL</div>
-    <h1 class="inner-hero-title">Know the Rip <span>Before You Bid</span></h1>
-    <p class="inner-hero-sub">Built by a breaker who learned the hard way. Free forever.</p>
+    <div class="inner-hero-eyebrow">Supplies</div>
+    <h1 class="inner-hero-title">Break <span>Supplies</span></h1>
+    <p class="inner-hero-sub">Top loaders, sleeves, storage, and everything you need to protect your pulls.</p>
   </div>
 </section>
 
 <div class="page-content">
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:4rem;">
+<div style="max-width:700px;margin:0 auto;text-align:center;">
 
-  <div>
-    <div style="font-family:var(--font-cond);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">The Origin Story</div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:1.25rem;">I Lost Real Money<br><span style="background:linear-gradient(90deg,var(--gold-pale),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Before I Built This</span></h2>
-
-    <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:1rem;">
-      I came into sports card breaks the way most people do — excited, caught up in the energy of the livestream, bidding on gut feel. If other people were paying $150 for a spot, it must be worth $150. Right?
-    </p>
-    <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:1rem;">
-      That was naive. By the time I started selling cards to recoup my costs, I realized I'd been consistently overpaying. Not because I was reckless — but because I had no tool to tell me what a spot was actually worth before I bid.
-    </p>
-    <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;margin-bottom:1rem;">
-      RIPVAL is the tool I wish I had. Nothing more, nothing less.
+  <div style="background:linear-gradient(135deg,rgba(212,160,23,0.06),rgba(212,160,23,0.02));border:1px solid rgba(212,160,23,0.15);border-radius:var(--radius-xl);padding:3rem 2.5rem;margin-bottom:2rem;">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">🚧</div>
+    <h2 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:0.75rem;">Coming Soon</h2>
+    <p style="font-size:0.92rem;color:var(--text-muted);line-height:1.75;max-width:480px;margin:0 auto;">
+      We're curating the best supplies for breakers and collectors — top loaders, penny sleeves, storage boxes, and more. Partnering with trusted retailers to bring you the best prices.
     </p>
   </div>
 
-  <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem;">
-    <div style="font-family:var(--font-cond);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">What This Is</div>
-    <div style="display:flex;flex-direction:column;gap:1rem;">
-      <div style="display:flex;gap:0.85rem;align-items:flex-start;">
-        <div style="width:28px;height:28px;background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">✓</div>
-        <div>
-          <div style="font-family:var(--font-cond);font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:0.2rem;">A data-driven pricing tool</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Calculate Fair Value per spot before you bid, based on the break structure and prize tiers.</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:0.85rem;align-items:flex-start;">
-        <div style="width:28px;height:28px;background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">✓</div>
-        <div>
-          <div style="font-family:var(--font-cond);font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:0.2rem;">A live repricing engine</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Track which team cohorts get claimed during a break and watch your Fair Value estimate update in real time.</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:0.85rem;align-items:flex-start;">
-        <div style="width:28px;height:28px;background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">✓</div>
-        <div>
-          <div style="font-family:var(--font-cond);font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:0.2rem;">Free. Always.</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Built for the community. No paywalls, no subscriptions, no gotchas.</div>
-        </div>
-      </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">📦</div>
+      <div style="font-family:var(--font-cond);font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:0.25rem;">Top Loaders</div>
+      <div style="font-size:0.75rem;color:var(--text-muted);">Rigid card protection</div>
     </div>
-
-    <div style="border-top:1px solid var(--border);margin-top:1.25rem;padding-top:1.25rem;">
-      <div style="font-family:var(--font-cond);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;">What This Is Not</div>
-      <div style="display:flex;flex-direction:column;gap:0.75rem;">
-        <div style="display:flex;gap:0.85rem;align-items:flex-start;">
-          <div style="width:28px;height:28px;background:rgba(204,31,31,0.10);border:1px solid rgba(204,31,31,0.25);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">✕</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">A guarantee of profit or return. Breaking cards is entertainment. You will lose money over time — that's the nature of the hobby.</div>
-        </div>
-        <div style="display:flex;gap:0.85rem;align-items:flex-start;">
-          <div style="width:28px;height:28px;background:rgba(204,31,31,0.10);border:1px solid rgba(204,31,31,0.25);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">✕</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">A replacement for your own research. Always verify box values with recent sales data before bidding.</div>
-        </div>
-      </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛡️</div>
+      <div style="font-family:var(--font-cond);font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:0.25rem;">Penny Sleeves</div>
+      <div style="font-size:0.75rem;color:var(--text-muted);">First line of defense</div>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">🗂️</div>
+      <div style="font-family:var(--font-cond);font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:0.25rem;">Storage Boxes</div>
+      <div style="font-size:0.75rem;color:var(--text-muted);">Long-term organization</div>
     </div>
   </div>
 
-</div>
+  <p style="font-size:0.85rem;color:var(--text-muted);">
+    In the meantime, check out our <a href="resources.html" style="color:var(--gold);text-decoration:none;">Resources page</a> for supply recommendations.
+  </p>
 
-<!-- Philosophy section -->
-<div style="background:linear-gradient(135deg,rgba(212,160,23,0.06),rgba(212,160,23,0.02));border:1px solid rgba(212,160,23,0.15);border-radius:var(--radius-xl);padding:2.5rem;margin-bottom:3rem;text-align:center;">
-  <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);margin-bottom:1rem;">♠</div>
-  <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:1rem;">The Card Counter Mindset</h3>
-  <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;max-width:680px;margin:0 auto 0.75rem;">
-    Breaking cards is like gambling — and there's nothing wrong with enjoying it as entertainment. But like a card counter at a blackjack table, the goal is to know when the odds are in your favor and when they're not.
-  </p>
-  <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;max-width:680px;margin:0 auto;">
-    RIPVAL gives you that edge. When the remaining cohorts are loaded with high-value markets and the spot price hasn't moved, that's your signal to press. When the marquee teams are gone and the price is still high, that's your signal to walk. <strong style="color:var(--gold-light);">Data over hype. Always.</strong>
-  </p>
-</div>
-
-<!-- Community section -->
-<div style="text-align:center;padding:1rem 0 2rem;">
-  <div style="font-family:var(--font-cond);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Built for the Community</div>
-  <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Transparency Is the Product</h3>
-  <p style="font-size:0.95rem;color:var(--text-body);line-height:1.8;max-width:600px;margin:0 auto 1.5rem;">
-    The sports card hobby deserves better data. Breakers work hard to run great events. Buyers deserve to participate with confidence. More transparency is good for everyone — better-informed buyers make for healthier, more sustainable breaks.
-  </p>
-  <a href="engine.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-cond);font-size:0.9rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold-light),var(--gold));border:none;border-radius:var(--radius-md);padding:0.65rem 1.5rem;cursor:pointer;text-decoration:none;box-shadow:0 2px 16px rgba(212,160,23,0.35);">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    Try the Engine
-  </a>
 </div>
 
 </div>
