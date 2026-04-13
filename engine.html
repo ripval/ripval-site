@@ -2791,11 +2791,7 @@ function restoreState() {
     if (state.boxes) document.getElementById('totalBoxes').value = state.boxes;
     if (state.spots) document.getElementById('totalSpots').value = state.spots;
     if (state.bid)   document.getElementById('spotPrice').value  = state.bid;
-    if (state.tiers && state.tiers.length > 0) {
-      document.getElementById('tierRows').innerHTML = '';
-      tierCount = 0;
-      state.tiers.forEach(function(t) { addTier(t); });
-    }
+    // Tiers intentionally NOT restored — always start with blank rows
     onSportChange();
     return true;
   } catch(e) { return false; }
@@ -2810,12 +2806,23 @@ document.addEventListener('change', function(e) {
 });
 
 // ============================================================
-// INIT
+// INIT — always start with blank tier rows
 // ============================================================
-var restored = restoreState();
-if (!restored) {
-  defaultTiers.forEach(function(t) { addTier(t); });
-}
+// Clear tiers from any saved state — always start fresh
+try {
+  var oldState = localStorage.getItem(STORAGE_KEY);
+  if (oldState) {
+    var parsed = JSON.parse(oldState);
+    parsed.tiers = [];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+  }
+} catch(e) {}
+
+// Restore sport/boxes/spots/bid but NOT tiers
+restoreState();
+
+// Always add 4 blank tier rows
+defaultTiers.forEach(function(t) { addTier(t); });
 
 </script>
 </body>
