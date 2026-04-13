@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://identity.netlify.com https://unpkg.com https://fonts.googleapis.com; object-src 'none';"
