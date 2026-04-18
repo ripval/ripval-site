@@ -1910,6 +1910,28 @@ body.page-shell { /* base styles only */ }
 .misc-tile { background: rgba(255,255,255,0.04) !important; border: 1.5px dashed rgba(255,255,255,0.15) !important; }
 .misc-tile .team-nickname { color: var(--text-muted) !important; }
 
+/* Tier indicator badge */
+.tier-indicator {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.85rem;
+  user-select: none;
+}
+.tier-indicator-label {
+  font-family: var(--font-cond); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+}
+.tier-indicator-value {
+  font-family: var(--font-cond); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.15rem 0.5rem; border-radius: 3px;
+}
+.tier-indicator-value.basic { background: rgba(52,211,153,0.15); color: #34D399; border: 1px solid rgba(52,211,153,0.3); }
+.tier-indicator-value.selective { background: rgba(96,165,250,0.15); color: #60A5FA; border: 1px solid rgba(96,165,250,0.3); }
+.tier-indicator-value.nuclear { background: rgba(255,107,107,0.15); color: #FF6B6B; border: 1px solid rgba(255,107,107,0.3); }
+
 /* Footer social icons gold */
 .social-btn {
   width: 36px; height: 36px;
@@ -2151,6 +2173,10 @@ img { border: none; outline: none; }
           <div class="board-subtitle">Click a team as it's claimed — Fair Value reprices in real time</div>
         </div>
         <div class="board-controls">
+          <div class="tier-indicator" id="tierIndicator" style="display:none;">
+            <span class="tier-indicator-label">Tier</span>
+            <span class="tier-indicator-value" id="tierIndicatorValue">—</span>
+          </div>
           <div class="hockey-toggle" id="hockeyToggle" style="display:none;" onclick="toggleHockey()">
             <span class="hockey-toggle-label">Hockey in Misc</span>
             <div class="toggle-sw" id="toggleSw"><div class="toggle-knob"></div></div>
@@ -2466,6 +2492,9 @@ function calculate() {
 
   // Activate team board if Multisport
   if (sport === 'Multisport') {
+    // Detect tier from prize tier inputs before activating board
+    currentTier = detectTier();
+    updateTierIndicator(currentTier);
     activateBoard(fairValue, spots);
   }
 
@@ -2490,6 +2519,31 @@ var hockeyInMisc = false;
 var claimedTeams = new Set();
 var boardOriginalFV = 0;
 var boardTotalSpots = 33;
+var currentTier = 'basic'; // 'basic' | 'selective' | 'nuclear'
+
+// ============================================================
+// TIER DETECTION — based on highest max value in any prize tier
+// Basic: ≤ $1,000  |  Selective: $1,001–$4,000  |  Nuclear: $4,001+
+// ============================================================
+function detectTier() {
+  var tiers = getTiers();
+  var highestMax = 0;
+  tiers.forEach(function(t) {
+    if (t.max > highestMax) highestMax = t.max;
+  });
+  if (highestMax >= 4001) return 'nuclear';
+  if (highestMax >= 1001) return 'selective';
+  return 'basic';
+}
+
+function updateTierIndicator(tier) {
+  var el = document.getElementById('tierIndicatorValue');
+  if (!el) return;
+  var labels = { basic: 'Basic', selective: 'Selective', nuclear: 'Nuclear' };
+  el.textContent = labels[tier] || 'Basic';
+  el.className = 'tier-indicator-value ' + tier;
+  document.getElementById('tierIndicator').style.display = 'flex';
+}
 
 function toggleHockey() {
   hockeyInMisc = !hockeyInMisc;
@@ -2572,20 +2626,99 @@ function showRepriceAlert(adjFV, origFV) {
 
 
 // ============================================================
-// COMPLETE 33-SPOT TEAM COHORT DATA
-// Source: Standard Multisport Card Break Team Cohorts doc
-// Order: NFL · NBA · MLB · NHL
-// NFL name NOT included in cohort string (shown as nickname separately)
-// "None" entries skipped — no blank spots
+// SIX WEIGHT TABLES
+// Scenario A = Hockey toggle OFF (hockey IN team cohorts)
+// Scenario B = Hockey toggle ON  (hockey IN Misc)
+// Each scenario has Basic / Selective / Nuclear tiers
+// Weights are independently derived — NOT transformations
 // ============================================================
+var WEIGHTS_A = {
+  // Scenario A: Hockey in team cohorts (toggle OFF)
+  dal: { basic:8063,  selective:8630,  nuclear:11028 },
+  phi: { basic:5980,  selective:6100,  nuclear:3600  },
+  nyg: { basic:8640,  selective:9160,  nuclear:8115  },
+  wsh: { basic:3019,  selective:3498,  nuclear:3397  },
+  chi: { basic:6353,  selective:7180,  nuclear:9915  },
+  det: { basic:6349,  selective:6709,  nuclear:5779  },
+  gb:  { basic:5224,  selective:5500,  nuclear:4053  },
+  min: { basic:4474,  selective:5079,  nuclear:5204  },
+  tb:  { basic:5500,  selective:5760,  nuclear:4910  },
+  atl: { basic:5105,  selective:5385,  nuclear:4640  },
+  car: { basic:2165,  selective:2650,  nuclear:2830  },
+  no:  { basic:3620,  selective:3620,  nuclear:2322  },
+  ari: { basic:3540,  selective:3540,  nuclear:2750  },
+  lar: { basic:7892,  selective:9150,  nuclear:16020 },
+  sea: { basic:4095,  selective:4320,  nuclear:4070  },
+  sf:  { basic:6160,  selective:6910,  nuclear:6685  },
+  buf: { basic:5420,  selective:5810,  nuclear:5317  },
+  mia: { basic:5140,  selective:5140,  nuclear:4175  },
+  nyj: { basic:5090,  selective:5090,  nuclear:3403  },
+  ne:  { basic:7890,  selective:8530,  nuclear:11197 },
+  bal: { basic:3875,  selective:4100,  nuclear:3960  },
+  cin: { basic:3715,  selective:4355,  nuclear:4999  },
+  cle: { basic:4386,  selective:5535,  nuclear:9245  },
+  pit: { basic:8357,  selective:9140,  nuclear:11510 },
+  hou: { basic:4420,  selective:4420,  nuclear:3128  },
+  ind: { basic:4875,  selective:5100,  nuclear:3710  },
+  jax: { basic:4417,  selective:4879,  nuclear:4610  },
+  ten: { basic:3930,  selective:3930,  nuclear:3065  },
+  den: { basic:4810,  selective:5175,  nuclear:4776  },
+  lac: { basic:8164,  selective:9049,  nuclear:10074 },
+  kc:  { basic:5600,  selective:6120,  nuclear:6935  },
+  lv:  { basic:3800,  selective:3800,  nuclear:2745  },
+  misc:{ basic:3600,  selective:3950,  nuclear:4375  },
+};
+
+var WEIGHTS_B = {
+  // Scenario B: Hockey in Misc (toggle ON)
+  dal: { basic:7613,  selective:8180,  nuclear:10803 },
+  phi: { basic:5350,  selective:5470,  nuclear:3285  },
+  nyg: { basic:7830,  selective:8350,  nuclear:7710  },
+  wsh: { basic:2459,  selective:2699,  nuclear:2559  },
+  chi: { basic:4393,  selective:5090,  nuclear:8295  },
+  det: { basic:4919,  selective:5279,  nuclear:5064  },
+  gb:  { basic:4964,  selective:5240,  nuclear:3923  },
+  min: { basic:3974,  selective:4579,  nuclear:4704  },
+  tb:  { basic:4570,  selective:4830,  nuclear:4285  },
+  atl: { basic:5105,  selective:5385,  nuclear:4640  },
+  car: { basic:2165,  selective:2650,  nuclear:2830  },
+  no:  { basic:1540,  selective:1540,  nuclear:1122  },
+  ari: { basic:3540,  selective:3540,  nuclear:2750  },
+  lar: { basic:7692,  selective:8950,  nuclear:15920 },
+  sea: { basic:4095,  selective:4320,  nuclear:4070  },
+  sf:  { basic:5680,  selective:6310,  nuclear:6085  },
+  buf: { basic:4290,  selective:4560,  nuclear:4392  },
+  mia: { basic:4520,  selective:4520,  nuclear:3705  },
+  nyj: { basic:4810,  selective:4810,  nuclear:3263  },
+  ne:  { basic:6620,  selective:7260,  nuclear:10242 },
+  bal: { basic:3075,  selective:3300,  nuclear:3310  },
+  cin: { basic:3495,  selective:4135,  nuclear:4889  },
+  cle: { basic:4386,  selective:5535,  nuclear:9245  },
+  pit: { basic:7017,  selective:7660,  nuclear:10065 },
+  hou: { basic:4420,  selective:4420,  nuclear:3128  },
+  ind: { basic:4455,  selective:4680,  nuclear:3500  },
+  jax: { basic:2560,  selective:2560,  nuclear:2280  },
+  ten: { basic:3730,  selective:3730,  nuclear:2965  },
+  den: { basic:3010,  selective:3235,  nuclear:3191  },
+  lac: { basic:7764,  selective:8649,  nuclear:9714  },
+  kc:  { basic:5350,  selective:5870,  nuclear:6685  },
+  lv:  { basic:3580,  selective:3580,  nuclear:2635  },
+  misc:{ basic:5750,  selective:6300,  nuclear:6000  },
+};
+
 // ============================================================
 // TEAM DATA — organized by NFL conference and division
 // Division order: NFC (East, North, South, West) then AFC (East, North, South, West)
 // Alphabetical by nickname within each division
 // Cohort = NBA · MLB · NHL (NHL only shown if !hockeyInMisc)
 // NFL team NOT repeated in cohort string
+// Weight pulled from correct scenario + tier at runtime
 // ============================================================
 function getTeamSlots() {
+  // Pick scenario: toggle OFF = A (hockey in cohorts), toggle ON = B (hockey in misc)
+  var W = hockeyInMisc ? WEIGHTS_B : WEIGHTS_A;
+  var tier = currentTier; // 'basic' | 'selective' | 'nuclear'
+
   function c(nba, mlb, hockey) {
     var parts = [];
     if (nba)  parts.push(nba);
@@ -2594,93 +2727,95 @@ function getTeamSlots() {
     return parts.join(' · ');
   }
 
+  function w(key) { return W[key][tier]; }
+
   return [
     // ── NFC EAST ─────────────────────────────────────────────
     { key:'dal', nickname:'COWBOYS',    bg:'#003594', textColor:'#A0AAAD',
-      cohort: c('Mavericks','Rangers','Stars'),           weight:9 },
+      cohort: c('Mavericks','Rangers','Stars'),           weight: w('dal') },
     { key:'phi', nickname:'EAGLES',     bg:'#004C54', textColor:'#A5ACAF',
-      cohort: c('76ers','Phillies','Flyers'),             weight:7 },
+      cohort: c('76ers','Phillies','Flyers'),             weight: w('phi') },
     { key:'nyg', nickname:'GIANTS',     bg:'#0B2265', textColor:'#A71930',
-      cohort: c('Knicks','Yankees','Rangers'),            weight:8 },
+      cohort: c('Knicks','Yankees','Rangers'),            weight: w('nyg') },
     { key:'wsh', nickname:'COMMANDERS', bg:'#773141', textColor:'#FFB612',
-      cohort: c('Wizards','Nationals','Capitals'),        weight:5 },
+      cohort: c('Wizards','Nationals','Capitals'),        weight: w('wsh') },
 
     // ── NFC NORTH ────────────────────────────────────────────
     { key:'chi', nickname:'BEARS',      bg:'#0B162A', textColor:'#C83803',
-      cohort: c('Bulls','Cubs','Blackhawks'),             weight:7 },
+      cohort: c('Bulls','Cubs','Blackhawks'),             weight: w('chi') },
     { key:'det', nickname:'LIONS',      bg:'#0076B6', textColor:'#B0B7BC',
-      cohort: c('Pistons','Tigers','Red Wings'),          weight:5 },
+      cohort: c('Pistons','Tigers','Red Wings'),          weight: w('det') },
     { key:'gb',  nickname:'PACKERS',    bg:'#203731', textColor:'#FFB612',
-      cohort: c('Bucks','Brewers','Canucks'),             weight:6 },
+      cohort: c('Bucks','Brewers','Canucks'),             weight: w('gb') },
     { key:'min', nickname:'VIKINGS',    bg:'#4F2683', textColor:'#FFC62F',
-      cohort: c('Timberwolves','Twins','Wild'),           weight:5 },
+      cohort: c('Timberwolves','Twins','Wild'),           weight: w('min') },
 
     // ── NFC SOUTH ────────────────────────────────────────────
     { key:'tb',  nickname:'BUCCANEERS', bg:'#D50A0A', textColor:'#FF7900',
-      cohort: c('Magic','Rays','Lightning'),             weight:6 },
+      cohort: c('Magic','Rays','Lightning'),             weight: w('tb') },
     { key:'atl', nickname:'FALCONS',    bg:'#A71930', textColor:'#000000',
-      cohort: c('Hawks','Braves','Flames'),              weight:6 },
+      cohort: c('Hawks','Braves','Flames'),              weight: w('atl') },
     { key:'car', nickname:'PANTHERS',   bg:'#0085CA', textColor:'#101820',
-      cohort: c('Hornets','Cardinals','Hurricanes'),     weight:3 },
+      cohort: c('Hornets','Cardinals','Hurricanes'),     weight: w('car') },
     { key:'no',  nickname:'SAINTS',     bg:'#D3BC8D', textColor:'#101820',
-      cohort: c('Pelicans',null,'Canadiens'),            weight:4 },
+      cohort: c('Pelicans',null,'Canadiens'),            weight: w('no') },
 
     // ── NFC WEST ─────────────────────────────────────────────
     { key:'ari', nickname:'CARDINALS',  bg:'#97233F', textColor:'#FFB612',
-      cohort: c('Suns','D-Backs','Coyotes'),             weight:5 },
+      cohort: c('Suns','D-Backs','Coyotes'),             weight: w('ari') },
     { key:'lar', nickname:'RAMS',       bg:'#003594', textColor:'#FFA300',
-      cohort: c('Lakers','Angels','Ducks'),              weight:9 },
+      cohort: c('Lakers','Angels','Ducks'),              weight: w('lar') },
     { key:'sea', nickname:'SEAHAWKS',   bg:'#002244', textColor:'#69BE28',
-      cohort: c('Trail Blazers','Mariners','Kraken'),    weight:6 },
+      cohort: c('Trail Blazers','Mariners','Kraken'),    weight: w('sea') },
     { key:'sf',  nickname:'49ERS',      bg:'#AA0000', textColor:'#B3995D',
-      cohort: c('Warriors','Giants','Sharks'),           weight:8 },
+      cohort: c('Warriors','Giants','Sharks'),           weight: w('sf') },
 
     // ── AFC EAST ─────────────────────────────────────────────
     { key:'buf', nickname:'BILLS',      bg:'#00338D', textColor:'#C60C30',
-      cohort: c('Raptors','Blue Jays','Sabres'),         weight:5 },
+      cohort: c('Raptors','Blue Jays','Sabres'),         weight: w('buf') },
     { key:'mia', nickname:'DOLPHINS',   bg:'#008E97', textColor:'#FC4C02',
-      cohort: c('Heat','Marlins','Florida Panthers'),    weight:6 },
+      cohort: c('Heat','Marlins','Florida Panthers'),    weight: w('mia') },
     { key:'nyj', nickname:'JETS',       bg:'#125740', textColor:'#ffffff',
-      cohort: c('Nets','Mets','Islanders'),              weight:4 },
+      cohort: c('Nets','Mets','Islanders'),              weight: w('nyj') },
     { key:'ne',  nickname:'PATRIOTS',   bg:'#002244', textColor:'#C60C30',
-      cohort: c('Celtics','Red Sox','Bruins'),           weight:7 },
+      cohort: c('Celtics','Red Sox','Bruins'),           weight: w('ne') },
 
     // ── AFC NORTH ────────────────────────────────────────────
     { key:'bal', nickname:'RAVENS',     bg:'#241773', textColor:'#9E7C0C',
-      cohort: c('Kings','Orioles','NJ Devils'),          weight:6 },
+      cohort: c('Kings','Orioles','NJ Devils'),          weight: w('bal') },
     { key:'cin', nickname:'BENGALS',    bg:'#FB4F14', textColor:'#000000',
-      cohort: c(null,'Reds','Jets'),                     weight:4 },
+      cohort: c(null,'Reds','Jets'),                     weight: w('cin') },
     { key:'cle', nickname:'BROWNS',     bg:'#FF3C00', textColor:'#311D00',
-      cohort: c('Cavaliers','Guardians','Blue Jackets'), weight:4 },
+      cohort: c('Cavaliers','Guardians','Blue Jackets'), weight: w('cle') },
     { key:'pit', nickname:'STEELERS',   bg:'#FFB612', textColor:'#101820',
-      cohort: c('Spurs','Pirates','Penguins'),           weight:6 },
+      cohort: c('Spurs','Pirates','Penguins'),           weight: w('pit') },
 
     // ── AFC SOUTH ────────────────────────────────────────────
     { key:'hou', nickname:'TEXANS',     bg:'#03202F', textColor:'#A71930',
-      cohort: c('Rockets','Astros','Maple Leafs'),       weight:5 },
+      cohort: c('Rockets','Astros','Maple Leafs'),       weight: w('hou') },
     { key:'ind', nickname:'COLTS',      bg:'#002C5F', textColor:'#A2AAAD',
-      cohort: c('Pacers','White Sox','Senators'),        weight:4 },
+      cohort: c('Pacers','White Sox','Senators'),        weight: w('ind') },
     { key:'jax', nickname:'JAGUARS',    bg:'#006778', textColor:'#9F792C',
-      cohort: c(null,'Padres','Oilers'),                 weight:3 },
+      cohort: c(null,'Padres','Oilers'),                 weight: w('jax') },
     { key:'ten', nickname:'TITANS',     bg:'#0C2340', textColor:'#4B92DB',
-      cohort: c('Grizzlies','Cardinals','Predators'),    weight:4 },
+      cohort: c('Grizzlies','Cardinals','Predators'),    weight: w('ten') },
 
     // ── AFC WEST ─────────────────────────────────────────────
     { key:'den', nickname:'BRONCOS',    bg:'#FB4F14', textColor:'#002244',
-      cohort: c('Nuggets','Rockies','Avalanche'),        weight:6 },
+      cohort: c('Nuggets','Rockies','Avalanche'),        weight: w('den') },
     { key:'lac', nickname:'CHARGERS',   bg:'#0080C6', textColor:'#FFC20E',
-      cohort: c('Clippers','Dodgers','Kings'),           weight:6 },
+      cohort: c('Clippers','Dodgers','Kings'),           weight: w('lac') },
     { key:'kc',  nickname:'CHIEFS',     bg:'#E31837', textColor:'#FFB81C',
-      cohort: c('Thunder','Royals','Blues'),             weight:9 },
+      cohort: c('Thunder','Royals','Blues'),             weight: w('kc') },
     { key:'lv',  nickname:'RAIDERS',    bg:'#000000', textColor:'#A5ACAF',
-      cohort: c('Jazz','Athletics','Golden Knights'),    weight:5 },
+      cohort: c('Jazz','Athletics','Golden Knights'),    weight: w('lv') },
 
     // ── MISC ─────────────────────────────────────────────────
     { key:'misc', nickname:'MISC',      bg:'rgba(255,255,255,0.06)', textColor:'#8899BB',
       cohort: hockeyInMisc
         ? 'Soccer · WNBA · Golf · UFC · NASCAR · NIL · Hockey'
         : 'Soccer · WNBA · Golf · UFC · NASCAR · NIL',
-      weight:2, isMisc:true },
+      weight: w('misc'), isMisc:true },
   ];
 }
 
